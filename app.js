@@ -1,4 +1,6 @@
 const inquirer = require("inquirer");
+// const inquirer = require("inquirer");
+
 const fs = require('fs');
 const generatePage = require('./src/page-template.js');
 
@@ -153,10 +155,12 @@ promptUser()
   .then(promptProject)
   .then((portfolioData) => {
     const pageHTML = generatePage(portfolioData);
+    console.log(portfolioData)
+    fs.writeFile('./index.html', pageHTML, err => {
+        if (err) throw Error(err);
 
-    // fs.writeFile('./index.html', pageHTML, err => {
-    //     if (err) throw Error(err);
-
-    //     console.log('Page created! Check out index.html in this directory to see it!');
-    // });
+        console.log('Page created! Check out index.html in this directory to see it!');
+    });
   });
+
+
